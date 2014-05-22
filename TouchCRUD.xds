@@ -1,0 +1,50 @@
+{
+    "name": "TouchCRUD",
+    "settings": {
+        "cmd": {
+            "license": "commercial"
+        },
+        "canvasControls": {
+            "viewportSize": {
+                "name": "iPhone",
+                "builtIn": true,
+                "height": 480,
+                "width": 320
+            },
+            "viewportOrientation": "portrait"
+        },
+        "urlPrefix": "http://localhost:2222",
+        "exportPath": "",
+        "projectHasEnabledWebServer": true,
+        "lastBuildSelection": {
+            "value": "webBuild",
+            "display": "Build web app"
+        }
+    },
+    "xdsVersion": "3.1.0",
+    "xdsBuild": 0,
+    "schemaVersion": 1,
+    "upgradeVersion": 300000000006,
+    "framework": "touch23",
+    "viewOrderMap": {
+        "view": [
+            "077ff75c-1551-4c16-b8b1-6c179ae7abaa",
+            "493bb37d-5f92-4f44-8faa-36884ea80817"
+        ],
+        "store": [
+            "36a9fdfe-c40c-4ed6-8fd8-c9180e7d31a7"
+        ],
+        "controller": [
+            "2733923a-f012-4fc8-8e51-034b2e4115e3"
+        ],
+        "model": [
+            "123a2aab-3e92-4e3a-975a-6d4e8566a2cc"
+        ],
+        "resource": [
+            "3d6a791c-08b6-448c-8d83-5c9b12d5cfd9"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

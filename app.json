@@ -1,0 +1,52 @@
+{
+   "name": "TouchCRUD",
+   "indexHtmlPath": "index.html",
+   "url": null,
+   "js": [
+      {
+         "path": "touch/sencha-touch.js",
+         "x-bootstrap": true
+      },
+      {
+         "path": "bootstrap.js",
+         "x-bootstrap": true
+      },
+      {
+         "path": "app.js",
+         "bundle": true,
+         "update": "delta"
+      }
+   ],
+   "css": [
+      {
+         "update": "delta",
+         "platform": [
+            "phone",
+            "tablet",
+            "desktop"
+         ],
+         "theme": "Default",
+         "path": "resources/css/sencha-touch.css"
+      }
+   ],
+   "appCache": {
+      "cache": [
+         "index.html"
+      ],
+      "network": [
+         "*"
+      ],
+      "fallback": []
+   },
+   "resources": [
+      "resources/images",
+      "resources/icons",
+      "resources/startup"
+   ],
+   "ignore": [
+      ".svn$"
+   ],
+   "archivePath": "archive",
+   "requires": [],
+   "id": "c313f563-bcff-4cec-a0f7-40f2c4134fa8"
+}
