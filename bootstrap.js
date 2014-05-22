@@ -681,10 +681,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "TouchCRUD.controller.Tasks": [],
   "TouchCRUD.model.Task": [],
   "TouchCRUD.store.Tasks": [],
-  "TouchCRUD.view.FormPanel": [],
   "TouchCRUD.view.Main": [],
-  "TouchCRUD.view.MainView": [],
-  "TouchCRUD.view.TaskList": []
+  "TouchCRUD.view.Tasks": []
 });
 Ext.ClassManager.addNameAliasMappings({
   "Ext.AbstractComponent": [],
@@ -1417,17 +1415,11 @@ Ext.ClassManager.addNameAliasMappings({
   "TouchCRUD.controller.Tasks": [],
   "TouchCRUD.model.Task": [],
   "TouchCRUD.store.Tasks": [],
-  "TouchCRUD.view.FormPanel": [
-    "widget.formpanel"
-  ],
   "TouchCRUD.view.Main": [
     "widget.main"
   ],
-  "TouchCRUD.view.MainView": [
-    "widget.mainview"
-  ],
-  "TouchCRUD.view.TaskList": [
-    "widget.tasklist"
+  "TouchCRUD.view.Tasks": [
+    "widget.tasks"
   ]
 });
 

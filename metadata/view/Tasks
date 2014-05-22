@@ -1,26 +1,19 @@
 {
-    "type": "Ext.navigation.View",
+    "type": "Ext.Panel",
     "reference": {
         "name": "items",
         "type": "array"
     },
     "codeClass": null,
     "userConfig": {
-        "activeItem": "1",
         "designer|initialView": true,
-        "designer|userAlias": "tasks",
+        "designer|userAlias": "mainview",
         "designer|userClassName": "Tasks",
-        "itemId": "tasks",
-        "ui": null
+        "layout": "fit",
+        "scrollable": "vertical"
     },
-    "designerId": "077ff75c-1551-4c16-b8b1-6c179ae7abaa",
-    "customConfigs": [
-        {
-            "group": "(Custom Properties)",
-            "name": "activeItem",
-            "type": "string"
-        }
-    ],
+    "name": "MyPanel",
+    "designerId": "493bb37d-5f92-4f44-8faa-36884ea80817",
     "cn": [
         {
             "type": "Ext.navigation.Bar",
@@ -30,11 +23,12 @@
             },
             "codeClass": null,
             "userConfig": {
+                "designer|displayName": "Navigation",
                 "docked": "top",
-                "itemId": "navBar"
+                "itemId": null
             },
             "name": "MyNavigationBar",
-            "designerId": "459934a0-f727-461f-b233-a0993b726842",
+            "designerId": "d3809dca-15dc-4218-be98-225ceffaef10",
             "cn": [
                 {
                     "type": "Ext.Button",
@@ -62,11 +56,12 @@
             },
             "codeClass": null,
             "userConfig": {
+                "itemId": "list",
                 "store": "Tasks",
                 "title": "Task List"
             },
             "name": "MyList",
-            "designerId": "1f2aa174-7fca-4eb5-9083-a68ef92560e7",
+            "designerId": "e7c5a23c-d4ca-46af-b93d-d59813547703",
             "customConfigs": [
                 {
                     "group": "(Custom Properties)",
@@ -99,6 +94,19 @@
             ]
         },
         {
+            "type": "Ext.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "details"
+            },
+            "name": "MyPanel",
+            "designerId": "4582fda3-5d69-4f5d-803b-e0f3c6e26ee5"
+        },
+        {
             "type": "Ext.form.Panel",
             "reference": {
                 "name": "items",
@@ -106,10 +114,11 @@
             },
             "codeClass": null,
             "userConfig": {
+                "docked": "top",
                 "itemId": "form"
             },
             "name": "MyFormPanel",
-            "designerId": "dc9a4e43-ca0f-4e76-b9bf-ccb94c325c5d",
+            "designerId": "70f8e1b3-3095-4e97-831f-ace785462b9f",
             "cn": [
                 {
                     "type": "Ext.form.FieldSet",
@@ -120,7 +129,7 @@
                     "codeClass": null,
                     "userConfig": {
                         "id": null,
-                        "itemId": "taskFormField",
+                        "itemId": "fieldset",
                         "title": null
                     },
                     "name": "MyFieldSet",

@@ -18,6 +18,28 @@
             },
             "codeClass": null,
             "userConfig": {
+                "designer|controlQuery": "*",
+                "designer|targetType": "Ext.dataview.List",
+                "fn": "select",
+                "implHandler": [
+                    "debugger;",
+                    "this.getAddButton().hide();",
+                    "this.getList().hide();",
+                    "this.getDetails().show();"
+                ],
+                "name": "itemtap"
+            },
+            "name": "select",
+            "designerId": "a606fa4d-2d50-4c6a-aa69-d2e67653bd9f"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
                 "designer|controlQuery": "mainview #addButton",
                 "designer|targetType": "Ext.Button",
                 "fn": "add",
@@ -44,17 +66,16 @@
             },
             "codeClass": null,
             "userConfig": {
-                "designer|controlQuery": "list",
-                "designer|targetType": "TaskList",
+                "designer|controlQuery": "list #editButton",
+                "designer|params": [
+                    "list"
+                ],
+                "designer|targetType": "Ext.dataview.List",
                 "fn": "edit",
                 "implHandler": [
-                    "debugger;",
-                    "var tasks = this.getTasks(),",
-                    "    form = this.getForm();",
-                    "this.getTasks().setActiveItem(form);",
                     "",
                     "// Navigate to form",
-                    "/*tasks.push({",
+                    "tasks.push({",
                     "    xtype: 'formpanel',",
                     "    title: 'Edit Task'",
                     "});",
@@ -72,9 +93,9 @@
                     "",
                     "mainView.setRecord(record);",
                     "",
-                    "this.holdSelect = true;*/"
+                    "this.holdSelect = true;"
                 ],
-                "name": "itemtouchend"
+                "name": "tap"
             },
             "name": "edit",
             "designerId": "c22ef67f-57dd-4d84-be23-5cc6b3d25fad"
@@ -87,7 +108,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "designer|controlQuery": "formpanel #saveButton",
+                "designer|controlQuery": "tasks #saveButton",
                 "designer|targetType": "Ext.Button",
                 "fn": "save",
                 "implHandler": [
@@ -128,16 +149,15 @@
             },
             "codeClass": null,
             "userConfig": {
-                "designer|controlQuery": "tasklist",
-                "designer|targetType": "TaskList",
-                "fn": "onTaskListShow",
-                "implHandler": [
-                    "this.getAddButton().show();"
+                "designer|controlQuery": "tasks #cancelButton",
+                "designer|params": [
+                    "target"
                 ],
-                "name": "show"
+                "fn": "cancel",
+                "name": "tap"
             },
-            "name": "onTaskListShow",
-            "designerId": "aee68443-6dca-4247-8862-4912c0554f35"
+            "name": "cancel",
+            "designerId": "12738b20-3965-49eb-9c25-c59bdc0af3b7"
         },
         {
             "type": "controlleraction",
@@ -183,10 +203,24 @@
             },
             "codeClass": null,
             "userConfig": {
-                "ref": "tasks",
-                "selector": "tasks"
+                "ref": "list",
+                "selector": "tasks #list"
             },
-            "name": "tasks",
+            "name": "list",
+            "designerId": "49fea524-c49a-4bbb-bd5e-6c52ffbb26e3"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "details",
+                "selector": "tasks #details"
+            },
+            "name": "details",
             "designerId": "359761db-20d2-41e7-b6fe-c0629136513f"
         },
         {
@@ -211,11 +245,11 @@
             },
             "codeClass": null,
             "userConfig": {
-                "ref": "addButton",
-                "selector": "tasks #addButton"
+                "ref": "fieldset",
+                "selector": "tasks #fieldset"
             },
-            "name": "addButton",
-            "designerId": "3e97ad92-d279-4203-972b-358b34dd910d"
+            "name": "fieldset",
+            "designerId": "0771fd20-d311-4473-83d0-c276d7e06ff6"
         },
         {
             "type": "controllerref",
@@ -225,11 +259,11 @@
             },
             "codeClass": null,
             "userConfig": {
-                "ref": "taskFormField",
-                "selector": "tasks #taskFormField"
+                "ref": "addButton",
+                "selector": "tasks #addButton"
             },
-            "name": "taskFormField",
-            "designerId": "0771fd20-d311-4473-83d0-c276d7e06ff6"
+            "name": "addButton",
+            "designerId": "3e97ad92-d279-4203-972b-358b34dd910d"
         },
         {
             "type": "controllerref",

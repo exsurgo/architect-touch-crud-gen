@@ -14,8 +14,8 @@
  */
 
 Ext.define('TouchCRUD.view.Tasks', {
-    extend: 'Ext.navigation.View',
-    alias: 'widget.tasks',
+    extend: 'Ext.Panel',
+    alias: 'widget.mainview',
 
     requires: [
         'Ext.navigation.Bar',
@@ -30,11 +30,10 @@ Ext.define('TouchCRUD.view.Tasks', {
     ],
 
     config: {
-        activeItem: '1',
-        itemId: 'tasks',
+        layout: 'fit',
+        scrollable: 'vertical',
         navigationBar: {
             docked: 'top',
-            itemId: 'navBar',
             items: [
                 {
                     xtype: 'button',
@@ -48,6 +47,7 @@ Ext.define('TouchCRUD.view.Tasks', {
             {
                 xtype: 'list',
                 title: 'Task List',
+                itemId: 'list',
                 itemTpl: [
                     '<div>',
                     '    <tpl if="completed">COMPLETED:</tpl>',
@@ -59,12 +59,17 @@ Ext.define('TouchCRUD.view.Tasks', {
                 store: 'Tasks'
             },
             {
+                xtype: 'panel',
+                itemId: 'details'
+            },
+            {
                 xtype: 'formpanel',
+                docked: 'top',
                 itemId: 'form',
                 items: [
                     {
                         xtype: 'fieldset',
-                        itemId: 'taskFormField',
+                        itemId: 'fieldset',
                         items: [
                             {
                                 xtype: 'textfield',

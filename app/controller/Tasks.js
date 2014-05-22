@@ -18,30 +18,41 @@ Ext.define('TouchCRUD.controller.Tasks', {
 
     config: {
         refs: {
-            tasks: 'tasks',
+            list: 'tasks #list',
+            details: 'tasks #details',
             form: 'tasks #form',
+            fieldset: 'tasks #fieldset',
             addButton: 'tasks #addButton',
-            taskFormField: 'tasks #taskFormField',
             deleteButton: 'tasks #deleteButton'
         },
 
         control: {
+            "*": {
+                itemtap: 'select'
+            },
             "mainview #addButton": {
                 tap: 'add'
             },
-            "list": {
-                itemtouchend: 'edit'
+            "list #editButton": {
+                tap: 'edit'
             },
-            "formpanel #saveButton": {
+            "tasks #saveButton": {
                 tap: 'save'
             },
-            "tasklist": {
-                show: 'onTaskListShow'
+            "tasks #cancelButton": {
+                tap: 'cancel'
             },
             "formpanel #deleteButton": {
                 tap: 'remove'
             }
         }
+    },
+
+    select: function(dataview, index, target, record, e, eOpts) {
+        debugger;
+        this.getAddButton().hide();
+        this.getList().hide();
+        this.getDetails().show();
     },
 
     add: function(button, e, eOpts) {
@@ -55,14 +66,10 @@ Ext.define('TouchCRUD.controller.Tasks', {
         this.getDeleteButton().hide();
     },
 
-    edit: function() {
-        debugger;
-        var tasks = this.getTasks(),
-            form = this.getForm();
-        this.getTasks().setActiveItem(form);
+    edit: function(list) {
 
         // Navigate to form
-        /*tasks.push({
+        tasks.push({
             xtype: 'formpanel',
             title: 'Edit Task'
         });
@@ -80,7 +87,7 @@ Ext.define('TouchCRUD.controller.Tasks', {
 
         mainView.setRecord(record);
 
-        this.holdSelect = true;*/
+        this.holdSelect = true;
     },
 
     save: function(button, e, eOpts) {
@@ -109,8 +116,8 @@ Ext.define('TouchCRUD.controller.Tasks', {
         this.getMainView().pop();
     },
 
-    onTaskListShow: function() {
-        this.getAddButton().show();
+    cancel: function(target) {
+
     },
 
     remove: function(button, e, eOpts) {
