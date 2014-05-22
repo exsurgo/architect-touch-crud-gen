@@ -28,7 +28,10 @@
     "framework": "touch23",
     "viewOrderMap": {
         "view": [
-            "493bb37d-5f92-4f44-8faa-36884ea80817"
+            "077ff75c-1551-4c16-b8b1-6c179ae7abaa",
+            "1f2aa174-7fca-4eb5-9083-a68ef92560e7",
+            "dc9a4e43-ca0f-4e76-b9bf-ccb94c325c5d",
+            "c03221ac-ef6f-4f08-b72e-a4ed38fbf1df"
         ],
         "store": [
             "36a9fdfe-c40c-4ed6-8fd8-c9180e7d31a7"

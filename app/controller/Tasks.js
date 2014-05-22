@@ -18,41 +18,29 @@ Ext.define('TouchCRUD.controller.Tasks', {
 
     config: {
         refs: {
-            list: 'tasks #list',
-            details: 'tasks #details',
-            form: 'tasks #form',
-            fieldset: 'tasks #fieldset',
-            addButton: 'tasks #addButton',
-            deleteButton: 'tasks #deleteButton'
+            taskView: 'taskview',
+            taskFormField: 'taskform #taskFormField',
+            addButton: 'taskview #addButton',
+            deleteButton: 'taskform #deleteButton'
         },
 
         control: {
-            "*": {
-                itemtap: 'select'
-            },
             "mainview #addButton": {
                 tap: 'add'
             },
-            "list #editButton": {
-                tap: 'edit'
+            "list": {
+                itemtouchend: 'edit'
             },
-            "tasks #saveButton": {
+            "formpanel #saveButton": {
                 tap: 'save'
-            },
-            "tasks #cancelButton": {
-                tap: 'cancel'
             },
             "formpanel #deleteButton": {
                 tap: 'remove'
+            },
+            "tasklist": {
+                show: 'onTaskListShow'
             }
         }
-    },
-
-    select: function(dataview, index, target, record, e, eOpts) {
-        debugger;
-        this.getAddButton().hide();
-        this.getList().hide();
-        this.getDetails().show();
     },
 
     add: function(button, e, eOpts) {
@@ -66,11 +54,12 @@ Ext.define('TouchCRUD.controller.Tasks', {
         this.getDeleteButton().hide();
     },
 
-    edit: function(list) {
+    edit: function(dataview, index, target, record, e, eOpts) {
+        var taskView = this.getTaskView();
 
         // Navigate to form
-        tasks.push({
-            xtype: 'formpanel',
+        taskView.push({
+            xtype: 'taskform',
             title: 'Edit Task'
         });
         this.getAddButton().hide();
@@ -85,7 +74,7 @@ Ext.define('TouchCRUD.controller.Tasks', {
             field.setValue(value);
         });
 
-        mainView.setRecord(record);
+        taskView.setRecord(record);
 
         this.holdSelect = true;
     },
@@ -116,10 +105,6 @@ Ext.define('TouchCRUD.controller.Tasks', {
         this.getMainView().pop();
     },
 
-    cancel: function(target) {
-
-    },
-
     remove: function(button, e, eOpts) {
         var me = this,
             title = 'Delete',
@@ -139,6 +124,10 @@ Ext.define('TouchCRUD.controller.Tasks', {
 
             }
         });
+    },
+
+    onTaskListShow: function(component, eOpts) {
+        this.getAddButton().show();
     }
 
 });

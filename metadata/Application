@@ -20,7 +20,10 @@
             "Tasks"
         ],
         "views": [
-            "Tasks"
+            "TaskList",
+            "TaskView",
+            "TaskForm",
+            "TaskDetails"
         ]
     },
     "name": "Application",
