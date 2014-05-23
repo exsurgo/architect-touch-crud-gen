@@ -43,6 +43,40 @@
                     },
                     "name": "MyButton",
                     "designerId": "75f1b719-faf7-4409-b018-b956257bef3d"
+                },
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "align": "right",
+                        "hidden": true,
+                        "iconCls": "compose",
+                        "itemId": "editButton",
+                        "text": null
+                    },
+                    "name": "MyButton6",
+                    "designerId": "b6e0a56b-189e-463a-b918-d92a7622a897"
+                },
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "align": "right",
+                        "hidden": true,
+                        "iconCls": "delete",
+                        "itemId": "deleteButton",
+                        "text": null
+                    },
+                    "name": "MyButton5",
+                    "designerId": "4ff19883-6395-48cf-9cdf-fd655de1f319"
                 }
             ]
         },
@@ -53,7 +87,7 @@
                 "type": "array"
             },
             "codeClass": null,
-            "name": "tasklist",
+            "name": "tasklist1",
             "designerId": "be17e96d-9ff1-45a6-8a7c-340ef2b45e2d",
             "masterInstanceId": "1f2aa174-7fca-4eb5-9083-a68ef92560e7"
         }

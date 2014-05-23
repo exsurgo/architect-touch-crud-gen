@@ -29,15 +29,7 @@ Ext.define('TouchCRUD.view.TaskForm', {
         items: [
             {
                 xtype: 'fieldset',
-                itemId: 'taskFormField',
                 items: [
-                    {
-                        xtype: 'textfield',
-                        label: 'Description',
-                        labelWidth: '35%',
-                        name: 'description',
-                        required: true
-                    },
                     {
                         xtype: 'selectfield',
                         label: 'Priority',
@@ -80,13 +72,6 @@ Ext.define('TouchCRUD.view.TaskForm', {
                 margin: 10,
                 ui: 'action',
                 text: 'Save'
-            },
-            {
-                xtype: 'button',
-                itemId: 'deleteButton',
-                margin: 10,
-                ui: 'decline',
-                text: 'Delete'
             }
         ]
     }

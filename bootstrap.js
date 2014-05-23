@@ -682,6 +682,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "TouchCRUD.model.Task": [],
   "TouchCRUD.store.Tasks": [],
   "TouchCRUD.view.Main": [],
+  "TouchCRUD.view.TaskDetails": [],
   "TouchCRUD.view.TaskForm": [],
   "TouchCRUD.view.TaskList": [],
   "TouchCRUD.view.TaskView": []
@@ -1419,6 +1420,9 @@ Ext.ClassManager.addNameAliasMappings({
   "TouchCRUD.store.Tasks": [],
   "TouchCRUD.view.Main": [
     "widget.main"
+  ],
+  "TouchCRUD.view.TaskDetails": [
+    "widget.taskdetails"
   ],
   "TouchCRUD.view.TaskForm": [
     "widget.taskform"

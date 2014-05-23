@@ -20,28 +20,12 @@
             "codeClass": null,
             "userConfig": {
                 "id": null,
-                "itemId": "taskFormField",
+                "itemId": null,
                 "title": null
             },
             "name": "MyFieldSet",
             "designerId": "62c8971d-3b8b-46c9-9b79-64fb1ad86ac8",
             "cn": [
-                {
-                    "type": "Ext.field.Text",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "label": "Description",
-                        "labelWidth": "35%",
-                        "name": "description",
-                        "required": true
-                    },
-                    "name": "MyTextField",
-                    "designerId": "b4e249ee-d94c-42cf-9d31-8ee5de161034"
-                },
                 {
                     "type": "Ext.field.Select",
                     "reference": {
@@ -156,23 +140,6 @@
             },
             "name": "MyButton3",
             "designerId": "80e3f879-569e-4320-892d-bbeab1414e37"
-        },
-        {
-            "type": "Ext.Button",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "id": null,
-                "itemId": "deleteButton",
-                "margin": 10,
-                "text": "Delete",
-                "ui": "decline"
-            },
-            "name": "MyButton4",
-            "designerId": "e054a189-69f0-4c90-999c-55b47094928e"
         }
     ]
 }

@@ -35,6 +35,20 @@ Ext.define('TouchCRUD.view.TaskView', {
                     align: 'right',
                     itemId: 'addButton',
                     iconCls: 'add'
+                },
+                {
+                    xtype: 'button',
+                    align: 'right',
+                    hidden: true,
+                    itemId: 'editButton',
+                    iconCls: 'compose'
+                },
+                {
+                    xtype: 'button',
+                    align: 'right',
+                    hidden: true,
+                    itemId: 'deleteButton',
+                    iconCls: 'delete'
                 }
             ]
         },

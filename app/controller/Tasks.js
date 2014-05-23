@@ -19,42 +19,52 @@ Ext.define('TouchCRUD.controller.Tasks', {
     config: {
         refs: {
             taskView: 'taskview',
-            taskFormField: 'taskform #taskFormField',
+            taskForm: 'taskform',
+            taskDetails: 'taskdetails',
+            fieldset: 'taskform fieldset',
             addButton: 'taskview #addButton',
-            deleteButton: 'taskform #deleteButton'
+            editButton: 'taskview #editButton',
+            deleteButton: 'taskview #deleteButton'
         },
 
         control: {
-            "mainview #addButton": {
+            "tasklist": {
+                itemtap: 'select'
+            },
+            "taskview #editButton": {
+                tap: 'edit'
+            },
+            "taskview #addButton": {
                 tap: 'add'
             },
-            "list": {
-                itemtouchend: 'edit'
-            },
-            "formpanel #saveButton": {
+            "taskview #saveButton": {
                 tap: 'save'
             },
-            "formpanel #deleteButton": {
+            "taskview #deleteButton": {
                 tap: 'remove'
             },
-            "tasklist": {
-                show: 'onTaskListShow'
+            "navigationview": {
+                push: 'onPush',
+                pop: 'onPop'
             }
         }
     },
 
-    add: function(button, e, eOpts) {
-        // Navigate to form
-        this.getMainView().push({
-            xtype: 'formpanel',
-            title: 'Add task'
+    select: function(dataview, index, target, record, e, eOpts) {
+        this.getTaskView().push({
+            xtype: 'taskdetails',
+            title: 'Viewing Task',
+            data: record
         });
 
         this.getAddButton().hide();
-        this.getDeleteButton().hide();
+        this.getEditButton().show();
+        this.getDeleteButton().show();
+
+        this.selectedRecord = record;
     },
 
-    edit: function(dataview, index, target, record, e, eOpts) {
+    edit: function(target) {
         var taskView = this.getTaskView();
 
         // Navigate to form
@@ -62,21 +72,19 @@ Ext.define('TouchCRUD.controller.Tasks', {
             xtype: 'taskform',
             title: 'Edit Task'
         });
-        this.getAddButton().hide();
-        this.getDeleteButton().show();
 
-        var taskFormField = this.getTaskFormField(),
-            fields = taskFormField.getFieldsAsArray();
+        this.getEditButton().hide();
 
-        Ext.each(fields, function(field) {
-            var key = field.getName(),
-                value = record.get(key);
-            field.setValue(value);
+        this.getTaskForm().setRecord(this.selectedRecord);
+    },
+
+    add: function(button, e, eOpts) {
+        this.getMainView().push({
+            xtype: 'taskform',
+            title: 'Add Task'
         });
 
-        taskView.setRecord(record);
-
-        this.holdSelect = true;
+        this.getAddButton().hide();
     },
 
     save: function(button, e, eOpts) {
@@ -100,6 +108,9 @@ Ext.define('TouchCRUD.controller.Tasks', {
             store.add(data);
         }
         store.sort();
+
+        this.deleteButton().hide();
+        this.getAddButton().show();
 
         // Navigate back to list
         this.getMainView().pop();
@@ -126,8 +137,12 @@ Ext.define('TouchCRUD.controller.Tasks', {
         });
     },
 
-    onTaskListShow: function(component, eOpts) {
-        this.getAddButton().show();
+    onPush: function(navigationview, view, eOpts) {
+
+    },
+
+    onPop: function(navigationview, view, eOpts) {
+
     }
 
 });
