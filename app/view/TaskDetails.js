@@ -14,7 +14,7 @@
  */
 
 Ext.define('TouchCRUD.view.TaskDetails', {
-    extend: 'Ext.form.Panel',
+    extend: 'Ext.Panel',
     alias: 'widget.taskdetails',
 
     requires: [
@@ -22,8 +22,10 @@ Ext.define('TouchCRUD.view.TaskDetails', {
     ],
 
     config: {
+        itemId: 'taskDetails',
+        padding: 10,
         tpl: [
-            '<label>Description: </label><span>{description}</span>'
+            '<p><label>Description: </label><span>{description}</span></p>'
         ]
     }
 

@@ -19,17 +19,18 @@ Ext.define('TouchCRUD.controller.Tasks', {
     config: {
         refs: {
             taskView: 'taskview',
+            taskList: 'tasklist',
             taskForm: 'taskform',
             taskDetails: 'taskdetails',
             fieldset: 'taskform fieldset',
             addButton: 'taskview #addButton',
             editButton: 'taskview #editButton',
-            deleteButton: 'taskview #deleteButton'
+            removeButton: 'taskview #removeButton'
         },
 
         control: {
             "tasklist": {
-                itemtap: 'select'
+                select: 'select'
             },
             "taskview #editButton": {
                 tap: 'edit'
@@ -40,108 +41,135 @@ Ext.define('TouchCRUD.controller.Tasks', {
             "taskview #saveButton": {
                 tap: 'save'
             },
-            "taskview #deleteButton": {
+            "taskview #removeButton": {
                 tap: 'remove'
             },
-            "navigationview": {
-                push: 'onPush',
-                pop: 'onPop'
+            "taskview > *": {
+                show: 'onNavigate'
             }
         }
     },
 
-    select: function(dataview, index, target, record, e, eOpts) {
+    select: function(dataview, record, eOpts) {
         this.getTaskView().push({
             xtype: 'taskdetails',
             title: 'Viewing Task',
-            data: record
+            data: record.getData()
         });
-
-        this.getAddButton().hide();
-        this.getEditButton().show();
-        this.getDeleteButton().show();
-
-        this.selectedRecord = record;
     },
 
     edit: function(target) {
-        var taskView = this.getTaskView();
+        // Get selected reocrd
+        var record = this.getTaskList().getSelection()[0];
 
-        // Navigate to form
-        taskView.push({
+        // Show form
+        this.getTaskView().push({
             xtype: 'taskform',
-            title: 'Edit Task'
+            title: 'Edit Task',
+            record: record
         });
-
-        this.getEditButton().hide();
-
-        this.getTaskForm().setRecord(this.selectedRecord);
     },
 
     add: function(button, e, eOpts) {
-        this.getMainView().push({
-            xtype: 'taskform',
-            title: 'Add Task'
-        });
+        // Remove current selection
+        this.getTaskList().deselectAll();
 
-        this.getAddButton().hide();
+        // Create new record
+        var record = Ext.create('model.task');
+
+        // Show form
+        this.getTaskView().push({
+            xtype: 'taskform',
+            title: 'Add Task',
+            record: record
+        });
     },
 
     save: function(button, e, eOpts) {
-        // Build up the model's data
-        var fields = this.getTaskFormField().getFieldsAsArray(),
-            data = {};
-        Ext.each(fields, function(field) {
-            var key = field.getName(),
-                value = field.getValue();
-            data[key] = value;
-        });
-
-        // Save the model's data
-        var mainView = this.getMainView(),
-            record = mainView.getRecord(),
+        var form = this.getTaskForm(),
+            record = form.getRecord(),
             store = Ext.getStore('Tasks');
-        if (record) {
-            record.set(data);
-            mainView.setRecord(null);
-        } else {
-            store.add(data);
+
+        // Update associated record with form values
+        form.updateRecord(record);
+
+        // Run validation
+        var errors = record.validate();
+
+        // Valid
+        if (errors.isValid()) {
+
+            // Add to store if new record
+            if (record.phantom) {
+
+                // TODO: Assign the record's ID from data source
+                // Normally, this value would be auto-generated,
+                // or returned from the server
+                var id = store.getData().all.length + 1;
+                record.set('id', id);
+
+                // Add to store
+                store.add(record);
+
+            }
+
+            // Commit changes
+            store.sync();
+
         }
-        store.sort();
 
-        this.deleteButton().hide();
-        this.getAddButton().show();
+        // Back to list
+        this.getTaskView().reset();
 
-        // Navigate back to list
-        this.getMainView().pop();
+        // Ensure current record is selectd
+        // Deleselect current, and prevent event from firing
+        this.getTaskList().select(record, false, true);
     },
 
     remove: function(button, e, eOpts) {
         var me = this,
-            title = 'Delete',
+            title = 'Delete Task',
             message = 'Are you sure you want to delete this task?';
 
         Ext.Msg.confirm(title, message, function(response) {
             if (response == 'yes') {
 
-        		var mainView = me.getMainView(),
-        		tasks = Ext.getStore('Tasks'),
-        		task = mainView.getRecord();
+        		var store = Ext.getStore('Tasks'),
+            record = me.getTaskList().getSelection()[0];
 
-        		tasks.remove(task);
+        		store.remove(record);
 
-        		// Navigate back to list
-        		mainView.pop();
+        		// Back to list view
+        		me.getTaskView().reset();
 
             }
         });
     },
 
-    onPush: function(navigationview, view, eOpts) {
+    onNavigate: function(component, eOpts) {
+        // Show/hide buttons based on view
 
-    },
+        var add = this.getAddButton(),
+            edit = this.getEditButton(),
+            remove = this.getRemoveButton();
 
-    onPop: function(navigationview, view, eOpts) {
+        switch (component.getItemId()) {
+            case 'taskList':
+                add.show();
+                edit.hide();
+                remove.hide();
+                break;
+            case 'taskDetails':
+                add.hide();
+                edit.show();
+                remove.show();
+                break;
+            case 'taskForm':
+                add.hide();
+                edit.hide();
+                remove.hide();
+                break;
+        }
 
     }
 

@@ -72,7 +72,7 @@
                         "align": "right",
                         "hidden": true,
                         "iconCls": "delete",
-                        "itemId": "deleteButton",
+                        "itemId": "removeButton",
                         "text": null
                     },
                     "name": "MyButton5",
@@ -87,7 +87,7 @@
                 "type": "array"
             },
             "codeClass": null,
-            "name": "tasklist1",
+            "name": "tasklist",
             "designerId": "be17e96d-9ff1-45a6-8a7c-340ef2b45e2d",
             "masterInstanceId": "1f2aa174-7fca-4eb5-9083-a68ef92560e7"
         }

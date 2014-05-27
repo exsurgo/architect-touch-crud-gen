@@ -25,16 +25,10 @@
                     "this.getTaskView().push({",
                     "    xtype: 'taskdetails',",
                     "    title: 'Viewing Task',",
-                    "    data: record",
-                    "});",
-                    "",
-                    "this.getAddButton().hide();",
-                    "this.getEditButton().show();",
-                    "this.getDeleteButton().show();",
-                    "",
-                    "this.selectedRecord = record;"
+                    "    data: record.getData()",
+                    "});"
                 ],
-                "name": "itemtap"
+                "name": "select"
             },
             "name": "select",
             "designerId": "7735ae5d-92c3-496c-b2f6-c356727ce4f8"
@@ -54,17 +48,15 @@
                 "designer|targetType": null,
                 "fn": "edit",
                 "implHandler": [
-                    "var taskView = this.getTaskView();",
+                    "// Get selected reocrd",
+                    "var record = this.getTaskList().getSelection()[0];",
                     "",
-                    "// Navigate to form",
-                    "taskView.push({",
+                    "// Show form",
+                    "this.getTaskView().push({",
                     "    xtype: 'taskform',",
-                    "    title: 'Edit Task'",
-                    "});",
-                    "",
-                    "this.getEditButton().hide();",
-                    "",
-                    "this.getTaskForm().setRecord(this.selectedRecord);"
+                    "    title: 'Edit Task',",
+                    "    record: record",
+                    "});"
                 ],
                 "name": "tap"
             },
@@ -83,12 +75,18 @@
                 "designer|targetType": "Ext.Button",
                 "fn": "add",
                 "implHandler": [
-                    "this.getMainView().push({",
-                    "    xtype: 'taskform',",
-                    "    title: 'Add Task'",
-                    "});",
+                    "// Remove current selection",
+                    "this.getTaskList().deselectAll();",
                     "",
-                    "this.getAddButton().hide();"
+                    "// Create new record",
+                    "var record = Ext.create('model.task');",
+                    "",
+                    "// Show form",
+                    "this.getTaskView().push({",
+                    "    xtype: 'taskform',",
+                    "    title: 'Add Task',",
+                    "    record: record",
+                    "});"
                 ],
                 "name": "tap"
             },
@@ -107,32 +105,44 @@
                 "designer|targetType": "Ext.Button",
                 "fn": "save",
                 "implHandler": [
-                    "// Build up the model's data",
-                    "var fields = this.getTaskFormField().getFieldsAsArray(),",
-                    "    data = {};",
-                    "Ext.each(fields, function(field) {",
-                    "    var key = field.getName(),",
-                    "        value = field.getValue();",
-                    "    data[key] = value;",
-                    "});",
-                    "",
-                    "// Save the model's data",
-                    "var mainView = this.getMainView(),",
-                    "    record = mainView.getRecord(),",
+                    "var form = this.getTaskForm(),",
+                    "    record = form.getRecord(),",
                     "    store = Ext.getStore('Tasks');",
-                    "if (record) {",
-                    "    record.set(data);",
-                    "    mainView.setRecord(null);",
-                    "} else {",
-                    "    store.add(data);",
+                    "",
+                    "// Update associated record with form values",
+                    "form.updateRecord(record);",
+                    "",
+                    "// Run validation",
+                    "var errors = record.validate();",
+                    "",
+                    "// Valid",
+                    "if (errors.isValid()) {",
+                    "",
+                    "    // Add to store if new record",
+                    "    if (record.phantom) {",
+                    "",
+                    "        // TODO: Assign the record's ID from data source",
+                    "        // Normally, this value would be auto-generated,",
+                    "        // or returned from the server",
+                    "        var id = store.getData().all.length + 1;",
+                    "        record.set('id', id);",
+                    "",
+                    "        // Add to store",
+                    "        store.add(record);",
+                    "",
+                    "    }",
+                    "",
+                    "    // Commit changes",
+                    "    store.sync();",
+                    "",
                     "}",
-                    "store.sort();",
                     "",
-                    "this.deleteButton().hide();",
-                    "this.getAddButton().show();",
+                    "// Back to list",
+                    "this.getTaskView().reset();",
                     "",
-                    "// Navigate back to list",
-                    "this.getMainView().pop();"
+                    "// Ensure current record is selectd",
+                    "// Deleselect current, and prevent event from firing",
+                    "this.getTaskList().select(record, false, true);"
                 ],
                 "name": "tap"
             },
@@ -147,27 +157,26 @@
             },
             "codeClass": null,
             "userConfig": {
-                "designer|controlQuery": "taskview #deleteButton",
+                "designer|controlQuery": "taskview #removeButton",
                 "designer|targetType": "Ext.Button",
                 "fn": "remove",
                 "implHandler": [
-                    "var me = this,\r",
-                    "    title = 'Delete',\r",
-                    "    message = 'Are you sure you want to delete this task?';\r",
-                    "\r",
-                    "Ext.Msg.confirm(title, message, function(response) {\r",
-                    "    if (response == 'yes') {\r",
-                    "\r",
-                    "\t\tvar mainView = me.getMainView(),\r",
-                    "\t\ttasks = Ext.getStore('Tasks'),\r",
-                    "\t\ttask = mainView.getRecord();\r",
-                    "\r",
-                    "\t\ttasks.remove(task);\r",
-                    "\r",
-                    "\t\t// Navigate back to list\r",
-                    "\t\tmainView.pop();\r",
-                    "\r",
-                    "    }\r",
+                    "var me = this,",
+                    "    title = 'Delete Task',",
+                    "    message = 'Are you sure you want to delete this task?';",
+                    "",
+                    "Ext.Msg.confirm(title, message, function(response) {",
+                    "    if (response == 'yes') {",
+                    "",
+                    "\t\tvar store = Ext.getStore('Tasks'),",
+                    "    record = me.getTaskList().getSelection()[0];",
+                    "",
+                    "\t\tstore.remove(record);",
+                    "",
+                    "\t\t// Back to list view",
+                    "\t\tme.getTaskView().reset();",
+                    "",
+                    "    }",
                     "});"
                 ],
                 "name": "tap"
@@ -183,29 +192,39 @@
             },
             "codeClass": null,
             "userConfig": {
-                "designer|controlQuery": "navigationview",
-                "designer|targetType": "Ext.navigation.View",
-                "fn": "onPush",
-                "name": "push"
+                "designer|controlQuery": "taskview > *",
+                "designer|targetType": "Ext.dataview.DataView",
+                "fn": "onNavigate",
+                "implHandler": [
+                    "// Show/hide buttons based on view",
+                    "",
+                    "var add = this.getAddButton(),",
+                    "    edit = this.getEditButton(),",
+                    "    remove = this.getRemoveButton();",
+                    "",
+                    "switch (component.getItemId()) {",
+                    "    case 'taskList':",
+                    "        add.show();",
+                    "        edit.hide();",
+                    "        remove.hide();",
+                    "        break;",
+                    "    case 'taskDetails':",
+                    "        add.hide();",
+                    "        edit.show();",
+                    "        remove.show();",
+                    "        break;",
+                    "    case 'taskForm':",
+                    "        add.hide();",
+                    "        edit.hide();",
+                    "        remove.hide();",
+                    "        break;",
+                    "}",
+                    ""
+                ],
+                "name": "show"
             },
-            "name": "onPush",
-            "designerId": "5893f462-4058-4d0d-b20d-013078f0a14c"
-        },
-        {
-            "type": "controlleraction",
-            "reference": {
-                "name": "listeners",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "designer|controlQuery": "navigationview",
-                "designer|targetType": "Ext.navigation.View",
-                "fn": "onPop",
-                "name": "pop"
-            },
-            "name": "onPop",
-            "designerId": "6139f148-13ec-4148-a222-baf4ff340355"
+            "name": "onNavigate",
+            "designerId": "e7e0faf1-84b9-4072-a9cb-40c4ec2de987"
         },
         {
             "type": "controllerref",
@@ -220,6 +239,20 @@
             },
             "name": "taskView",
             "designerId": "359761db-20d2-41e7-b6fe-c0629136513f"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "taskList",
+                "selector": "tasklist"
+            },
+            "name": "taskList",
+            "designerId": "26877a74-20c1-491f-a3e2-31bcda2feed3"
         },
         {
             "type": "controllerref",
@@ -299,10 +332,10 @@
             },
             "codeClass": null,
             "userConfig": {
-                "ref": "deleteButton",
-                "selector": "taskview #deleteButton"
+                "ref": "removeButton",
+                "selector": "taskview #removeButton"
             },
-            "name": "deleteButton",
+            "name": "removeButton",
             "designerId": "56a96f95-7521-4681-a72d-c8763e227ef6"
         }
     ]

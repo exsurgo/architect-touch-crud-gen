@@ -26,10 +26,17 @@ Ext.define('TouchCRUD.view.TaskForm', {
     ],
 
     config: {
+        itemId: 'taskForm',
         items: [
             {
                 xtype: 'fieldset',
                 items: [
+                    {
+                        xtype: 'textfield',
+                        label: 'Description',
+                        labelWidth: '35%',
+                        name: 'description'
+                    },
                     {
                         xtype: 'selectfield',
                         label: 'Priority',

@@ -8,6 +8,7 @@
     "userConfig": {
         "designer|userAlias": "tasklist",
         "designer|userClassName": "TaskList",
+        "itemId": "taskList",
         "store": "Tasks",
         "title": "Task List"
     },
@@ -40,21 +41,6 @@
             },
             "name": "tpl",
             "designerId": "b0251509-2f65-49fa-9148-a6360bc05749"
-        },
-        {
-            "type": "Ext.Button",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "docked": "bottom",
-                "margin": 10,
-                "text": "Save"
-            },
-            "name": "MyButton7",
-            "designerId": "a44b87e3-cc8b-42e6-8401-f9e7d1ab706f"
         }
     ]
 }

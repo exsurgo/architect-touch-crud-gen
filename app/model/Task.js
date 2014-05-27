@@ -15,6 +15,7 @@
 
 Ext.define('TouchCRUD.model.Task', {
     extend: 'Ext.data.Model',
+    alias: 'model.task',
 
     requires: [
         'Ext.data.Field'

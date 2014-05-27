@@ -7,7 +7,8 @@
     "codeClass": null,
     "userConfig": {
         "designer|userAlias": "taskform",
-        "designer|userClassName": "TaskForm"
+        "designer|userClassName": "TaskForm",
+        "itemId": "taskForm"
     },
     "designerId": "dc9a4e43-ca0f-4e76-b9bf-ccb94c325c5d",
     "cn": [
@@ -26,6 +27,21 @@
             "name": "MyFieldSet",
             "designerId": "62c8971d-3b8b-46c9-9b79-64fb1ad86ac8",
             "cn": [
+                {
+                    "type": "Ext.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "label": "Description",
+                        "labelWidth": "35%",
+                        "name": "description"
+                    },
+                    "name": "MyTextField",
+                    "designerId": "8f9d9936-3e8f-4eaa-8393-f1494afd6001"
+                },
                 {
                     "type": "Ext.field.Select",
                     "reference": {

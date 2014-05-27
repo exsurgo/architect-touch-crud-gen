@@ -18,12 +18,12 @@ Ext.define('TouchCRUD.view.TaskList', {
     alias: 'widget.tasklist',
 
     requires: [
-        'Ext.XTemplate',
-        'Ext.Button'
+        'Ext.XTemplate'
     ],
 
     config: {
         title: 'Task List',
+        itemId: 'taskList',
         store: 'Tasks',
         itemTpl: [
             '<div>',
@@ -32,14 +32,6 @@ Ext.define('TouchCRUD.view.TaskList', {
             '    {description}',
             '    <tpl if="dueDate"> - {dueDate:date}</tpl>',
             '</div>'
-        ],
-        items: [
-            {
-                xtype: 'button',
-                docked: 'bottom',
-                margin: 10,
-                text: 'Save'
-            }
         ]
     }
 

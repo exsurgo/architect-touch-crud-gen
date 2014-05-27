@@ -1,5 +1,5 @@
 {
-    "type": "Ext.form.Panel",
+    "type": "Ext.Panel",
     "reference": {
         "name": "items",
         "type": "array"
@@ -7,9 +7,10 @@
     "codeClass": null,
     "userConfig": {
         "designer|userAlias": "taskdetails",
-        "designer|userClassName": "TaskDetails"
+        "designer|userClassName": "TaskDetails",
+        "itemId": "taskDetails",
+        "padding": 10
     },
-    "name": "MyFormPanel",
     "designerId": "c03221ac-ef6f-4f08-b72e-a4ed38fbf1df",
     "cn": [
         {
@@ -22,7 +23,7 @@
             "userConfig": {
                 "designer|displayName": "tpl",
                 "implHandler": [
-                    "<label>Description: </label><span>{description}</span>"
+                    "<p><label>Description: </label><span>{description}</span></p>"
                 ]
             },
             "name": "tpl",
