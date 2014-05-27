@@ -22,7 +22,6 @@ Ext.define('TouchCRUD.controller.Tasks', {
             taskList: 'tasklist',
             taskForm: 'taskform',
             taskDetails: 'taskdetails',
-            fieldset: 'taskform fieldset',
             addButton: 'taskview #addButton',
             editButton: 'taskview #editButton',
             removeButton: 'taskview #removeButton'

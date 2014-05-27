@@ -1416,7 +1416,9 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
   "TouchCRUD.controller.Tasks": [],
-  "TouchCRUD.model.Task": [],
+  "TouchCRUD.model.Task": [
+    "model.task"
+  ],
   "TouchCRUD.store.Tasks": [],
   "TouchCRUD.view.Main": [
     "widget.main"

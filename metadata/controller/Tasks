@@ -290,20 +290,6 @@
             },
             "codeClass": null,
             "userConfig": {
-                "ref": "fieldset",
-                "selector": "taskform fieldset"
-            },
-            "name": "fieldset",
-            "designerId": "0771fd20-d311-4473-83d0-c276d7e06ff6"
-        },
-        {
-            "type": "controllerref",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
                 "ref": "addButton",
                 "selector": "taskview #addButton"
             },
