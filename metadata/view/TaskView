@@ -1,32 +1,32 @@
 {
-    "type": "Ext.navigation.View",
+    "type": "Ext.Panel",
     "reference": {
         "name": "items",
         "type": "array"
     },
     "codeClass": null,
     "userConfig": {
+        "container|animation": "slide",
         "designer|initialView": true,
         "designer|userAlias": "taskview",
         "designer|userClassName": "TaskView",
-        "itemId": "mainView",
-        "ui": null
+        "layout": "card"
     },
-    "designerId": "077ff75c-1551-4c16-b8b1-6c179ae7abaa",
+    "name": "MyPanel1",
+    "designerId": "04026584-0dc5-4c1c-9096-434e83e5eaf9",
     "cn": [
         {
-            "type": "Ext.navigation.Bar",
+            "type": "Ext.Toolbar",
             "reference": {
-                "name": "navigationBar",
-                "type": "object"
+                "name": "items",
+                "type": "array"
             },
             "codeClass": null,
             "userConfig": {
-                "docked": "top",
-                "itemId": "navBar"
+                "docked": "top"
             },
-            "name": "MyNavigationBar",
-            "designerId": "459934a0-f727-461f-b233-a0993b726842",
+            "name": "MyToolbar",
+            "designerId": "4820adba-0cd3-4cbe-a4fd-47e79c3661db",
             "cn": [
                 {
                     "type": "Ext.Button",
@@ -36,7 +36,30 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "align": "right",
+                        "itemId": "backButton",
+                        "text": "Back"
+                    },
+                    "name": "MyButton4",
+                    "designerId": "b2a8ebc9-0328-4fce-9ca7-792d4df96de3"
+                },
+                {
+                    "type": "Ext.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "name": "MySpacer",
+                    "designerId": "03405348-7d54-4552-85e5-66043fff58a8"
+                },
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
                         "iconCls": "add",
                         "itemId": "addButton",
                         "text": null
@@ -52,7 +75,6 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "align": "right",
                         "hidden": true,
                         "iconCls": "compose",
                         "itemId": "editButton",
@@ -69,7 +91,6 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "align": "right",
                         "hidden": true,
                         "iconCls": "delete",
                         "itemId": "removeButton",
@@ -88,12 +109,13 @@
             },
             "codeClass": null,
             "userConfig": {
-                "itemId": "taskList",
+                "autoDestroy": false,
+                "itemId": "list",
                 "store": "Tasks",
                 "title": "Task List"
             },
             "name": "MyList",
-            "designerId": "1f2aa174-7fca-4eb5-9083-a68ef92560e7",
+            "designerId": "86fd8f8f-115d-48c4-9cc8-a968885aba73",
             "customConfigs": [
                 {
                     "group": "(Custom Properties)",
@@ -122,6 +144,200 @@
                     },
                     "name": "tpl",
                     "designerId": "b0251509-2f65-49fa-9148-a6360bc05749"
+                }
+            ]
+        },
+        {
+            "type": "Ext.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "autoDestroy": false,
+                "itemId": "details",
+                "padding": 10
+            },
+            "name": "MyPanel",
+            "designerId": "e5be9e77-63fc-4092-89da-4cefa5e2b076",
+            "cn": [
+                {
+                    "type": "Ext.XTemplate",
+                    "reference": {
+                        "name": "tpl",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "tpl",
+                        "implHandler": [
+                            "<p><label>Description: </label><span>{description}</span></p>"
+                        ]
+                    },
+                    "name": "tpl",
+                    "designerId": "9cdc1965-5d88-4d5a-8e03-7d3d30883491"
+                }
+            ]
+        },
+        {
+            "type": "Ext.form.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "autoDestroy": false,
+                "itemId": "form"
+            },
+            "name": "MyFormPanel",
+            "designerId": "af676596-df9e-4781-8e22-9d6ede317b85",
+            "cn": [
+                {
+                    "type": "Ext.form.FieldSet",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": null,
+                        "itemId": null,
+                        "title": null
+                    },
+                    "name": "MyFieldSet",
+                    "designerId": "62c8971d-3b8b-46c9-9b79-64fb1ad86ac8",
+                    "cn": [
+                        {
+                            "type": "Ext.field.Text",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "label": "Description",
+                                "labelWidth": "35%",
+                                "name": "description"
+                            },
+                            "name": "MyTextField",
+                            "designerId": "8f9d9936-3e8f-4eaa-8393-f1494afd6001"
+                        },
+                        {
+                            "type": "Ext.field.Select",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "label": "Priority",
+                                "labelWidth": "35%",
+                                "name": "priority",
+                                "options": [
+                                    "[",
+                                    "    { text: \"Normal\", value: \"Normal\" },",
+                                    "    { text: \"High\", value: \"High\" },",
+                                    "    { text: \"Low\", value: \"Low\" }",
+                                    "]"
+                                ],
+                                "required": true,
+                                "usePicker": [
+                                    "true"
+                                ]
+                            },
+                            "name": "MySelectField",
+                            "designerId": "48258b0e-caff-4e24-8a25-1f42ccdadb78"
+                        },
+                        {
+                            "type": "Ext.field.DatePicker",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "label": "Due Date",
+                                "labelWidth": "35%",
+                                "name": "dueDate",
+                                "placeHolder": null
+                            },
+                            "name": "MyDatePicker",
+                            "designerId": "703c67a2-9abb-4e4c-9c65-40c7df873fe2",
+                            "cn": [
+                                {
+                                    "type": "Ext.picker.Date",
+                                    "reference": {
+                                        "name": "picker",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyDatePicker1",
+                                    "designerId": "27f2b73b-05a8-439b-8231-fdfa855983c3",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "doneButton",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "text": "Done"
+                                            },
+                                            "name": "MyButton1",
+                                            "designerId": "3c661544-db6a-4f25-93a8-29d9a96a0387"
+                                        },
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "cancelButton",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "text": "Cancel"
+                                            },
+                                            "name": "MyButton2",
+                                            "designerId": "72042193-e7b6-410b-941e-0f43a1ee2d77"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.field.Toggle",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "label": "Completed",
+                                "labelWidth": "35%",
+                                "name": "completed"
+                            },
+                            "name": "MyToggleField",
+                            "designerId": "2ef477d6-0a58-45ef-86b3-f3905a284467"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "saveButton",
+                        "margin": 10,
+                        "text": "Save",
+                        "ui": "action"
+                    },
+                    "name": "MyButton3",
+                    "designerId": "80e3f879-569e-4320-892d-bbeab1414e37"
                 }
             ]
         }

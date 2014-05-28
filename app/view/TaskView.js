@@ -14,49 +14,64 @@
  */
 
 Ext.define('TouchCRUD.view.TaskView', {
-    extend: 'Ext.navigation.View',
+    extend: 'Ext.Panel',
     alias: 'widget.taskview',
 
     requires: [
-        'Ext.navigation.Bar',
+        'Ext.Toolbar',
         'Ext.Button',
+        'Ext.Spacer',
         'Ext.dataview.List',
-        'Ext.XTemplate'
+        'Ext.XTemplate',
+        'Ext.form.Panel',
+        'Ext.form.FieldSet',
+        'Ext.field.DatePicker',
+        'Ext.picker.Date',
+        'Ext.field.Toggle'
     ],
 
     config: {
-        itemId: 'mainView',
-        navigationBar: {
-            docked: 'top',
-            itemId: 'navBar',
-            items: [
-                {
-                    xtype: 'button',
-                    align: 'right',
-                    itemId: 'addButton',
-                    iconCls: 'add'
-                },
-                {
-                    xtype: 'button',
-                    align: 'right',
-                    hidden: true,
-                    itemId: 'editButton',
-                    iconCls: 'compose'
-                },
-                {
-                    xtype: 'button',
-                    align: 'right',
-                    hidden: true,
-                    itemId: 'removeButton',
-                    iconCls: 'delete'
-                }
-            ]
+        layout: {
+            type: 'card',
+            animation: 'slide'
         },
         items: [
             {
+                xtype: 'toolbar',
+                docked: 'top',
+                items: [
+                    {
+                        xtype: 'button',
+                        itemId: 'backButton',
+                        text: 'Back'
+                    },
+                    {
+                        xtype: 'spacer'
+                    },
+                    {
+                        xtype: 'button',
+                        itemId: 'addButton',
+                        iconCls: 'add'
+                    },
+                    {
+                        xtype: 'button',
+                        hidden: true,
+                        itemId: 'editButton',
+                        iconCls: 'compose'
+                    },
+                    {
+                        xtype: 'button',
+                        hidden: true,
+                        itemId: 'removeButton',
+                        iconCls: 'delete'
+                    }
+                ]
+            },
+            {
                 xtype: 'list',
                 title: 'Task List',
-                itemId: 'taskList',
+                itemId: 'list',
+                autoDestroy: false,
                 itemTpl: [
                     '<div>',
                     '    <tpl if="completed">COMPLETED:</tpl>',
@@ -66,6 +81,74 @@ Ext.define('TouchCRUD.view.TaskView', {
                     '</div>'
                 ],
                 store: 'Tasks'
+            },
+            {
+                xtype: 'panel',
+                itemId: 'details',
+                padding: 10,
+                tpl: [
+                    '<p><label>Description: </label><span>{description}</span></p>'
+                ],
+                autoDestroy: false
+            },
+            {
+                xtype: 'formpanel',
+                itemId: 'form',
+                autoDestroy: false,
+                items: [
+                    {
+                        xtype: 'fieldset',
+                        items: [
+                            {
+                                xtype: 'textfield',
+                                label: 'Description',
+                                labelWidth: '35%',
+                                name: 'description'
+                            },
+                            {
+                                xtype: 'selectfield',
+                                label: 'Priority',
+                                labelWidth: '35%',
+                                name: 'priority',
+                                required: true,
+                                options: [
+                                    {
+                                        text: 'Normal',
+                                        value: 'Normal'
+                                    },
+                                    {
+                                        text: 'High',
+                                        value: 'High'
+                                    },
+                                    {
+                                        text: 'Low',
+                                        value: 'Low'
+                                    }
+                                ],
+                                usePicker: true
+                            },
+                            {
+                                xtype: 'datepickerfield',
+                                label: 'Due Date',
+                                labelWidth: '35%',
+                                name: 'dueDate'
+                            },
+                            {
+                                xtype: 'togglefield',
+                                label: 'Completed',
+                                labelWidth: '35%',
+                                name: 'completed'
+                            }
+                        ]
+                    },
+                    {
+                        xtype: 'button',
+                        itemId: 'saveButton',
+                        margin: 10,
+                        ui: 'action',
+                        text: 'Save'
+                    }
+                ]
             }
         ]
     }

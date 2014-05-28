@@ -18,17 +18,18 @@ Ext.define('TouchCRUD.controller.Tasks', {
 
     config: {
         refs: {
-            taskView: 'taskview',
-            taskList: 'taskview #taskList',
-            taskForm: 'taskform',
-            taskDetails: 'taskdetails',
+            main: 'taskview',
+            list: 'taskview #list',
+            details: 'taskview #details',
+            form: 'taskview #form',
+            backButton: 'taskview #backButton',
             addButton: 'taskview #addButton',
             editButton: 'taskview #editButton',
             removeButton: 'taskview #removeButton'
         },
 
         control: {
-            "taskview #taskList": {
+            "taskview #list": {
                 select: 'select'
             },
             "taskview #editButton": {
@@ -43,49 +44,35 @@ Ext.define('TouchCRUD.controller.Tasks', {
             "taskview #removeButton": {
                 tap: 'remove'
             },
+            "taskview #backButton": {
+                tap: 'back'
+            },
             "taskview > *": {
-                show: 'onNavigate'
+                show: 'setButtons'
             }
         }
     },
 
     select: function(dataview, record, eOpts) {
-        this.getTaskView().push({
-            xtype: 'taskdetails',
-            title: 'Viewing Task',
-            data: record.getData()
-        });
+        // Show details with selected record
+        this.showView('details', record);
     },
 
     edit: function(target) {
-        // Get selected reocrd
-        var record = this.getTaskList().getSelection()[0];
-
-        // Show form
-        this.getTaskView().push({
-            xtype: 'taskform',
-            title: 'Edit Task',
-            record: record
-        });
+        // Show form with selected record
+        this.showView('form', this.getSelection());
     },
 
     add: function(button, e, eOpts) {
         // Remove current selection
-        this.getTaskList().deselectAll();
+        this.getList().deselectAll();
 
-        // Create new record
-        var record = Ext.create('model.task');
-
-        // Show form
-        this.getTaskView().push({
-            xtype: 'taskform',
-            title: 'Add Task',
-            record: record
-        });
+        // Show form with new record
+        this.showView('form', Ext.create('model.task'));
     },
 
     save: function(button, e, eOpts) {
-        var form = this.getTaskForm(),
+        var form = this.getForm(),
             record = form.getRecord(),
             store = Ext.getStore('Tasks');
 
@@ -118,11 +105,7 @@ Ext.define('TouchCRUD.controller.Tasks', {
         }
 
         // Back to list
-        this.getTaskView().reset();
-
-        // Ensure current record is selectd
-        // Deleselect current, and prevent event from firing
-        this.getTaskList().select(record, false, true);
+        this.reset(record);
     },
 
     remove: function(button, e, eOpts) {
@@ -130,46 +113,83 @@ Ext.define('TouchCRUD.controller.Tasks', {
             title = 'Delete Task',
             message = 'Are you sure you want to delete this task?';
 
+        // Show confirmation message
         Ext.Msg.confirm(title, message, function(response) {
             if (response == 'yes') {
 
+        // Remove record
         		var store = Ext.getStore('Tasks'),
-            record = me.getTaskList().getSelection()[0];
-
+            record = me.getSelection();
         		store.remove(record);
 
         		// Back to list view
-        		me.getTaskView().reset();
+        		me.reset();
 
             }
         });
     },
 
-    onNavigate: function(component, eOpts) {
+    back: function(target) {
+        // Slide back 1 view
+        this.getMain().animateActiveItem(-1, { type: 'slide', direction: 'right' });
+    },
+
+    setButtons: function(component, eOpts) {
         // Show/hide buttons based on view
 
-        var add = this.getAddButton(),
+        var back = this.getBackButton(),
+            add = this.getAddButton(),
             edit = this.getEditButton(),
             remove = this.getRemoveButton();
 
         switch (component.getItemId()) {
-            case 'taskList':
+            case 'list':
+                back.hide();
                 add.show();
                 edit.hide();
                 remove.hide();
                 break;
-            case 'taskDetails':
+            case 'details':
+                back.show();
                 add.hide();
                 edit.show();
                 remove.show();
                 break;
-            case 'taskForm':
+            case 'form':
+                back.show();
                 add.hide();
                 edit.hide();
                 remove.hide();
                 break;
         }
 
+    },
+
+    reset: function(record) {
+        var main = this.getMain(),
+            list = this.getList();
+
+        // Slide back to list view
+        main.animateActiveItem(list, { type: 'slide', direction: 'right' });
+
+        // Select record if provided
+        // Deleselect current, and prevent event from firing
+        if (record) {
+            list.select(record, false, true);
+        }
+    },
+
+    showView: function(itemId, record) {
+        var main = this.getMain(),
+            active = main.down('#' + itemId);
+        main.setActiveItem(active);
+        if (record) {
+            active.setRecord(record);
+        }
+    },
+
+    getSelection: function() {
+        return this.getList().getSelection()[0];
     }
 
 });
