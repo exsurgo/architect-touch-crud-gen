@@ -18,7 +18,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "designer|controlQuery": "tasklist",
+                "designer|controlQuery": "taskview #taskList",
                 "designer|targetType": "Ext.dataview.List",
                 "fn": "select",
                 "implHandler": [
@@ -249,7 +249,7 @@
             "codeClass": null,
             "userConfig": {
                 "ref": "taskList",
-                "selector": "tasklist"
+                "selector": "taskview #taskList"
             },
             "name": "taskList",
             "designerId": "26877a74-20c1-491f-a3e2-31bcda2feed3"

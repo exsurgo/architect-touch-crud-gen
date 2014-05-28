@@ -31,7 +31,7 @@ Ext.application({
         'Tasks'
     ],
     views: [
-        'TaskList',
+        null,
         'TaskView',
         'TaskForm',
         'TaskDetails'

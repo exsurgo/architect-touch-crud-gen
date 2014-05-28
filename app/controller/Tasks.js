@@ -19,7 +19,7 @@ Ext.define('TouchCRUD.controller.Tasks', {
     config: {
         refs: {
             taskView: 'taskview',
-            taskList: 'tasklist',
+            taskList: 'taskview #taskList',
             taskForm: 'taskform',
             taskDetails: 'taskdetails',
             addButton: 'taskview #addButton',
@@ -28,7 +28,7 @@ Ext.define('TouchCRUD.controller.Tasks', {
         },
 
         control: {
-            "tasklist": {
+            "taskview #taskList": {
                 select: 'select'
             },
             "taskview #editButton": {

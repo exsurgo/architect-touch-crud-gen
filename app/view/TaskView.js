@@ -18,10 +18,10 @@ Ext.define('TouchCRUD.view.TaskView', {
     alias: 'widget.taskview',
 
     requires: [
-        'TouchCRUD.view.TaskList',
         'Ext.navigation.Bar',
         'Ext.Button',
-        'Ext.dataview.List'
+        'Ext.dataview.List',
+        'Ext.XTemplate'
     ],
 
     config: {
@@ -54,7 +54,18 @@ Ext.define('TouchCRUD.view.TaskView', {
         },
         items: [
             {
-                xtype: 'tasklist'
+                xtype: 'list',
+                title: 'Task List',
+                itemId: 'taskList',
+                itemTpl: [
+                    '<div>',
+                    '    <tpl if="completed">COMPLETED:</tpl>',
+                    '    {priority} -',
+                    '    {description}',
+                    '    <tpl if="dueDate"> - {dueDate:date}</tpl>',
+                    '</div>'
+                ],
+                store: 'Tasks'
             }
         ]
     }
